@@ -23,10 +23,9 @@ frequency resolution but some high temporal resolution.
 ```julia
 wav = CauchyWavelet(10.0)
 ```
-In a next step, choose the scales for the wavelet transform. Here the scales are generated in a
-reciprocal spacing from 50 samples to 500 samples.
+In a next step, choose the scales for the wavelet transform.
 ```julia
-scales = map(s -> 1.0/s, LinRange(1/50,1/500, 64))
+scales = Array{Float64}(LinRange(50, 500, 64))
 ```
 Then, constructs the transformation object. This prepares and pre-evaluates the kernels.
 ```julia
