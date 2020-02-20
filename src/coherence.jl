@@ -16,7 +16,7 @@ function coherence(wt::WaveletTransform, X::Array{Float64, 2})
         P[:,:] += map(abs, wX.wX)
     end
     C ./= P
-    
+
     WaveletCoherence(C, wt.scales, wt.wavelet)
 end
 
@@ -25,7 +25,7 @@ Base.size(A::WaveletCoherence) = size(A.coh)
 Base.getindex(A::WaveletCoherence, I::Vararg{Int, N}) where {N} = getindex(A.coh, I...);
 Base.setindex!(A::WaveletCoherence, v, I::Vararg{Int, N}) where {N} = setindex!(A.coh, v, I...)
 
-function Plots.contourf(A::WaveletTransformed; kw...)
+function Plots.contourf(A::WaveletCoherence; kw...)
     contourf(1:size(A.coh)[1], A.scales, transpose(map(abs, A.coh)); kw...);
     # draw valid range
 end
