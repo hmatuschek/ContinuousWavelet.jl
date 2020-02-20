@@ -1,5 +1,5 @@
 module ContinuousWavelet
+include("transform.jl")
 
-greet() = print("Hello World!")
-
-end # module
+export CauchyWavelet, MorletWavelet, WaveletTransform, transform
+end  # module ContinuousWavelet
