@@ -44,9 +44,9 @@ function surrogate(A::Array{Float64, 2})
     ϕ = rand(Float64, M)
     for i in 1:(N÷2)
         z = res[1+i,:] + 1im*res[end-i,:];
-        z = (abs.z)*(exp.(2im*π*ϕ))
-        res[1+i,:] = real.z
-        res[end-i,:] = imag.z
+        z = map(abs,z).*(exp.(2im*π*ϕ))
+        res[1+i,:] = map(real,z)
+        res[end-i,:] = map(imag,z)
     end
     # compute inverse half-complex -> real DFT inplace
     r2r!(res, HC2R, 1)
@@ -61,9 +61,9 @@ function surrogate!(A::Array{Float64, 2})
     ϕ = rand(Float64, M)
     for i in 1:(N÷2)
         z = A[1+i,:] + 1im*A[end-i,:];
-        z = (abs.z)*(exp.(2im*π*ϕ))
-        A[1+i,:] = real.z
-        A[end-i,:] = imag.z
+        z = map(abs,z)*(exp.(2im*π*ϕ))
+        A[1+i,:] = map(real,z)
+        A[end-i,:] = map(imag,z)
     end
     # compute inverse half-complex -> real DFT inplace
     r2r!(A, HC2R, 1)

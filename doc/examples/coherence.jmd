@@ -1,0 +1,29 @@
+---
+title: "Example: Coherence analysis"
+author: "H. Matuschek"
+date: 2020-02-20
+---
+
+```julia
+using ContinuousWavelet
+using Plots
+gr();
+
+N = 1024;
+M = 64;
+X = zeros(Float64, N, M);
+#X[N÷2] = 1;
+for i in 1:M
+  X[:,i] = sin.(2π*(1:N)/50)
+end
+
+wt = WaveletTransform(CauchyWavelet(10.0), Array{Float64, 1}(LinRange(2,100, 64)));
+
+Cx = coherence(wt, X)
+Cs = coherence(wt, surrogate(X))
+plot(
+  contourf(Cx),
+  contourf(Cs),
+  layout=(2,1)
+)
+```
