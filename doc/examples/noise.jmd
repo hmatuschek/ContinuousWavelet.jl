@@ -9,32 +9,32 @@ date: 2020-02-20
 using ContinuousWavelet
 using Plots
 using Random
-using BenchmarkTools
+# Init graphics backend
+gr();
 ```
 
 Make some noise
 ```julia
 N = 1024
-X = randn(N)
+X = randn(N);
 ```
 
-Prepare wavelet transform: First choose a wavelet. For example a Cauchy wavelet with some low
-frequency resolution but some high temporal resolution.
+Prepare wavelet transform: First choose a wavelet. For example a Cauchy wavelet.
 ```julia
-wav = CauchyWavelet(10.0)
+wav = CauchyWavelet(10.0);
 ```
 In a next step, choose the scales for the wavelet transform.
 ```julia
-scales = Array{Float64}(LinRange(50, 500, 64))
+scales = Array{Float64}(LinRange(50, 500, 64));
 ```
 Then, constructs the transformation object. This prepares and pre-evaluates the kernels.
 ```julia
-wt = WaveletTransform(wav, scales)
+wt = WaveletTransform(wav, scales);
 ```
 
 Finally perform the transformation by using the transform() method.
 ```julia
-wX = transform(wt, X)
+wX = transform(wt, X);
 ```
 
 ```julia

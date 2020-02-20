@@ -12,4 +12,7 @@ Base.size(A::WaveletTransformed) = size(A.wX)
 Base.getindex(A::WaveletTransformed, I::Vararg{Int, N}) where {N} = getindex(A.wX, I...);
 Base.setindex!(A::WaveletTransformed, v, I::Vararg{Int, N}) where {N} = setindex!(A.wX, v, I...)
 
-Plots.contourf(A::WaveletTransformed; kw...) = contourf(1:size(A.wX)[1], A.scales, transpose(map(abs, A.wX)); kw...);
+function Plots.contourf(A::WaveletTransformed; kw...)
+    contourf(1:size(A.wX)[1], A.scales, transpose(map(abs, A.wX)); kw...);
+    # draw valid range
+end

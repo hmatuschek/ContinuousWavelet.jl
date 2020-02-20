@@ -8,7 +8,7 @@ struct WaveletTransform
     scales::Array{Float64, 1}
     kernels::Array{Complex{Float64}, 2}
 
-    function WaveletTransform(wav::GenericContinuousWavelet, scales::Array{Float64, 1})
+    function WaveletTransform(wav::GenericContinuousWavelet, scales::AbstractVector)
         blocks  = Tuple{Int32,Int32,Int32}[]
         lengths = Int32[]
         sscales = sort(scales)

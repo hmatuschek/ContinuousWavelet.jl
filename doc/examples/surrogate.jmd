@@ -1,0 +1,26 @@
+---
+title: "Example: Surrogate data"
+author: "H. Matuschek"
+date: 2020-02-20
+---
+
+```julia
+using ContinuousWavelet
+using Plots
+gr();
+
+N = 1024;
+X = zeros(Float64, N);
+#X[N÷2] = 1;
+X[:] = sin.(2π*(1:N)/50)
+
+wt = WaveletTransform(CauchyWavelet(10.0), Array{Float64, 1}(LinRange(2,100, 64)));
+wX = transform(wt, X);
+wS = transform(wt, surrogate(X));
+
+plot(
+  contourf(wX),
+  contourf(wS),
+  layout=(2,1)
+)
+```
