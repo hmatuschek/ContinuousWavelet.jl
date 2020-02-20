@@ -13,6 +13,6 @@ Base.getindex(A::WaveletTransformed, I::Vararg{Int, N}) where {N} = getindex(A.w
 Base.setindex!(A::WaveletTransformed, v, I::Vararg{Int, N}) where {N} = setindex!(A.wX, v, I...)
 
 function Plots.contourf(A::WaveletTransformed; kw...)
-    contourf(1:size(A.wX)[1], A.scales, transpose(map(abs, A.wX)); kw...);
+    contourf(1:size(A.wX)[1], A.scales, transpose(map(abs, A.wX)); linewidth=0, kw...);
     # draw valid range
 end

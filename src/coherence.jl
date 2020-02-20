@@ -43,7 +43,7 @@ function Plots.contourf(A::WaveletCoherence; kw...)
     X = 1:size(A.coh)[1]
     Y = A.scales
     Z = transpose(map(abs, A.coh))
-    cplt = contourf(X, Y, Z; kw...);
+    cplt = contourf(X, Y, Z; linewidth=0, kw...);
     # TODO draw valid range
     # draw point-wise significance level if set
     if isdefined(A.α)
