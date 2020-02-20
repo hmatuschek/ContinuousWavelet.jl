@@ -18,18 +18,18 @@ function coherence(wt::WaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=
     end
     C ./= P
 
-    threshold = undef;
+    threshold = NaN;
     if nsurrogate > 0
         empC = Array{Float64, 1}[]
         # generate nsurrogate surrogate datasets and obtain coherence
         for i in 1:nsurrogate
-            Cs = coherence(wt, surrogate(X); nsurrogate=0)
-            append!(empC, reshape(Cs, sum(size(Cs))))
+            Cs = coherence(wt, surrogate(X); nsurrogate=0).coh
+            empC = vcat(empC, map(abs, reshape(Cs, (prod(size(Cs)),)) ) )
         end
         # get threshold corresponding to the given α-level
         sort!(empC)
-        i = Int((1.0-α)*length(empC))
-        thresholds = empC[(i<1) ? 1 : i]
+        i = Int32(floor((1.0-α)*length(empC)))
+        threshold = empC[(i<1) ? 1 : i]
     end
     WaveletCoherence(C, wt.scales, wt.wavelet, threshold)
 end
@@ -43,11 +43,11 @@ function Plots.contourf(A::WaveletCoherence; kw...)
     X = 1:size(A.coh)[1]
     Y = A.scales
     Z = transpose(map(abs, A.coh))
-    cplt = contourf(X, Y, Z; linewidth=0, kw...);
+    cn = contourf(X, Y, Z; linewidth=0, kw...);
     # TODO draw valid range
     # draw point-wise significance level if set
-    if isdefined(A.α)
-        contour!(X, Y, Y; levels=A.α, line_width=3, seriescolor=:reds)
+    if isfinite(A.α)
+        contour!(X, Y, Z; levels=[A.α], linewidth=3)
     end
-    return cplt
+    return cn
 end
