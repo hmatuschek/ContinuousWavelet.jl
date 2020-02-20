@@ -1,0 +1,43 @@
+---
+title: " Example: Continuous wavelet transform of noise"
+author: "H. Matuschek"
+date: 2020-02-20
+---
+
+
+```julia
+include("../src/ContinuousWavelet.jl")
+using Plots
+using Random
+using BenchmarkTools
+```
+
+Make some noise
+```julia
+N = 1024
+X = randn(N)
+```
+
+Prepare wavelet transform: First choose a wavelet. For example a Cauchy wavelet with some low
+frequency resolution but some high temporal resolution.
+```julia
+wav = ContinuousWavelet.CauchyWavelet(10.0)
+```
+In a next step, choose the scales for the wavelet transform. Here the scales are generated in a
+reciprocal spacing from 50 samples to 500 samples.
+```julia
+scales = map(s -> 1.0/s, LinRange(1/50,1/500, 64))
+```
+Then, constructs the transformation object. This prepares and pre-evaluates the kernels.
+```julia
+wt = ContinuousWavelet.WaveletTransform(wav, scales)
+```
+
+Finally perform the transformation by using the transform() method.
+```julia
+wX = ContinuousWavelet.transform(wt, X)
+```
+
+```julia
+contourf(wX, levels=60)
+```
