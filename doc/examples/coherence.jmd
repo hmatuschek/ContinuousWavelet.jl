@@ -11,13 +11,13 @@ gr();
 
 N = 1024;
 M = 10;
-X = zeros(Float64, N, M);
+X = zeros(Float64, M, N);
 for i in 1:M
-  X[:,i] = sin.(2π*(1:N)/50)+3*randn(Float64, N)
+  X[i,:] = sin.(2π*(1:N)/50)+3*randn(Float64, N)
 end
 
-wt = ContinuousWaveletTransform(CauchyWavelet(10.0), Array{Float64, 1}(LinRange(2,100, 64)));
+wt = ContinuousWaveletTransform(CauchyWavelet(10.0), LinRange(2,100, 64));
 
-Cx = coherence(wt, X; nsurrogate=10)
+Cx = coherence(wt, transpose(X))
 contourf(Cx);
 ```
