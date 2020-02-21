@@ -12,7 +12,6 @@ gr();
 N = 1024;
 M = 10;
 X = zeros(Float64, N, M);
-#X[N÷2] = 1;
 for i in 1:M
   X[:,i] = sin.(2π*(1:N)/50)+3*randn(Float64, N)
 end
