@@ -14,7 +14,7 @@ X = zeros(Float64, N);
 #X[N÷2] = 1;
 X[:] = sin.(2π*(1:N)/50)
 
-wt = WaveletTransform(CauchyWavelet(10.0), Array{Float64, 1}(LinRange(2,100, 64)));
+wt = ContinuousWaveletTransform(CauchyWavelet(10.0), Array{Float64, 1}(LinRange(2,100, 64)));
 wX = transform(wt, X);
 wS = transform(wt, surrogate(X));
 

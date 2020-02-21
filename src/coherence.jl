@@ -1,13 +1,13 @@
 using Plots; contourf, plot
 
-struct WaveletCoherence <: AbstractArray{Complex{Float64}, 2}
+struct ContinuousWaveletCoherence <: AbstractArray{Complex{Float64}, 2}
     coh::Array{Complex{Float64}, 2}
     scales::Array{Float64, 1}
     wavelet::GenericContinuousWavelet
     α::Float64
 end
 
-function coherence(wt::WaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=0.05)
+function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=0.05)
     N,M = size(X)
     C = zeros(Complex{Float64}, N, length(wt.scales))
     P = zeros(Float64, N, length(wt.scales))
@@ -35,11 +35,11 @@ function coherence(wt::WaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=
 end
 
 
-Base.size(A::WaveletCoherence) = size(A.coh)
-Base.getindex(A::WaveletCoherence, I::Vararg{Int, N}) where {N} = getindex(A.coh, I...);
-Base.setindex!(A::WaveletCoherence, v, I::Vararg{Int, N}) where {N} = setindex!(A.coh, v, I...)
+Base.size(A::ContinuousWaveletCoherence) = size(A.coh)
+Base.getindex(A::ContinuousWaveletCoherence, I::Vararg{Int, N}) where {N} = getindex(A.coh, I...);
+Base.setindex!(A::ContinuousWaveletCoherence, v, I::Vararg{Int, N}) where {N} = setindex!(A.coh, v, I...)
 
-function Plots.contourf(A::WaveletCoherence; kw...)
+function Plots.contourf(A::ContinuousWaveletCoherence; kw...)
     X = 1:size(A.coh)[1]
     Y = A.scales
     Z = transpose(map(abs, A.coh))

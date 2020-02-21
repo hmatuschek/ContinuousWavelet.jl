@@ -29,7 +29,7 @@ scales = Array{Float64}(LinRange(50, 500, 64));
 ```
 Then, constructs the transformation object. This prepares and pre-evaluates the kernels.
 ```julia
-wt = WaveletTransform(wav, scales);
+wt = ContinuousWaveletTransform(wav, scales);
 ```
 
 Finally perform the transformation by using the transform() method.

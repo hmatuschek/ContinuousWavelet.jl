@@ -2,13 +2,13 @@ using DSP: conv
 
 include("transformed.jl")
 
-struct WaveletTransform
+struct ContinuousWaveletTransform
     wavelet::GenericContinuousWavelet
     blocks::Array{Tuple{Int32,Int32,Int32}, 1}
     scales::Array{Float64, 1}
     kernels::Array{Complex{Float64}, 2}
 
-    function WaveletTransform(wav::GenericContinuousWavelet, scales::AbstractVector)
+    function ContinuousWaveletTransform(wav::GenericContinuousWavelet, scales::AbstractVector)
         blocks  = Tuple{Int32,Int32,Int32}[]
         lengths = Int32[]
         sscales = sort(scales)
@@ -36,7 +36,7 @@ struct WaveletTransform
     end
 end
 
-function transform(trans::WaveletTransform, x::Array{Float64,1})
+function transform(trans::ContinuousWaveletTransform, x::Array{Float64,1})
     N = length(x)
     M = length(trans.scales)
     wX = Array{Complex{Float64},2}(undef, N,M)
