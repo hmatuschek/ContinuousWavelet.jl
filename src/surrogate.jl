@@ -2,7 +2,7 @@ using FFTW: r2r, r2r!, R2HC, HC2R
 using Random
 
 
-function surrogate(A::AbtractArray{Float64, 1})
+function surrogate(A::AbstractArray{Float64, 1})
     N = length(A)
     # compute real -> half-complex DFT
     res = r2r(A, R2HC, 1)
