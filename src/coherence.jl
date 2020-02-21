@@ -22,7 +22,7 @@ struct ContinuousWaveletCoherence <: AbstractArray{Complex{Float64}, 2}
 end
 
 #"""
-#    coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=0.05)
+#    coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
 #
 #Implements the *self-coherence* of a set of time-series. The *self-coherence* is defined as
 #```math
@@ -42,7 +42,7 @@ end
 #- `α`: A keyword arguement specifying the significance level for the point-wise significance test.
 #  By default set to `α=0.05`.
 #"""
-function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrogate=0, α=0.05)
+function coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
     N,M = size(X)
     C = zeros(Complex{Float64}, N, length(wt.scales))
     P = zeros(Float64, N, length(wt.scales))
@@ -72,7 +72,7 @@ function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrog
 end
 
 #"""
-#    coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}, Y::Array{Float64, 2}; nsurrogate=0, α=0.05)
+#    coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}, Y::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
 #
 #Canonical wavelet coherence as defined by
 #```math
@@ -100,7 +100,7 @@ end
 #- `α`: A keyword arguement specifying the significance level for the point-wise significance test.
 #    By default set to `α=0.05`.
 #"""
-function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}, Y::Array{Float64, 2}; nsurrogate=0, α=0.05)
+function coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}, Y::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
     (size(X) != size(Y)) && error("Arrays X & Y must be of same size!");
     N,M = size(X)
     C = zeros(Complex{Float64}, N, length(wt.scales))

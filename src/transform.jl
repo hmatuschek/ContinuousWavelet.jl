@@ -36,7 +36,7 @@ struct ContinuousWaveletTransform
     end
 end
 
-function transform(trans::ContinuousWaveletTransform, x::Array{Float64,1})
+function transform(trans::ContinuousWaveletTransform, x::AbstractArray{Float64,1})
     N = length(x)
     M = length(trans.scales)
     wX = Array{Complex{Float64},2}(undef, N,M)
