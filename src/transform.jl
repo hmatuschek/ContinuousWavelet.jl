@@ -45,5 +45,5 @@ function transform(trans::ContinuousWaveletTransform, x::Array{Float64,1})
         wX[:,(a:b)] = conv(trans.kernels[(1:K),(a:b)], x)[(off+1):(off+N)]
     end
 
-    WaveletTransformed(wX, trans.scales, trans.wavelet)
+    ContinuousWaveletTransformed(wX, trans.scales, trans.wavelet)
 end

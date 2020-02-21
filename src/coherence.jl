@@ -49,9 +49,11 @@ function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrog
     for i in 1:M
         wX = transform(wt, X[:,i])
         C[:,:] += wX.wX
-        P[:,:] += map(abs, wX.wX)
+        P[:,:] += map(z->z^2, map(abs, wX.wX))
     end
+    C = map(z->z^2, map(abs, C)) ./ M;
     C ./= P
+
 
     threshold = NaN;
     if nsurrogate > 0
@@ -66,7 +68,7 @@ function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}; nsurrog
         i = Int32(floor((1.0-α)*length(empC)))
         threshold = empC[(i<1) ? 1 : i]
     end
-    WaveletCoherence(C, wt.scales, wt.wavelet, threshold)
+    ContinuousWaveletCoherence(C, wt.scales, wt.wavelet, threshold)
 end
 
 #"""
@@ -124,7 +126,7 @@ function coherence(wt::ContinuousWaveletTransform, X::Array{Float64, 2}, Y::Arra
         i = Int32(floor((1.0-α)*length(empC)))
         threshold = empC[(i<1) ? 1 : i]
     end
-    WaveletCoherence(C, wt.scales, wt.wavelet, threshold)
+    ContinuousWaveletCoherence(C, wt.scales, wt.wavelet, threshold)
 end
 
 Base.size(A::ContinuousWaveletCoherence) = size(A.coh)
@@ -146,7 +148,7 @@ function Plots.contourf(A::ContinuousWaveletCoherence; kw...)
     # TODO draw valid range
     # draw point-wise significance level if set
     if isfinite(A.α)
-        contour!(X, Y, Z; levels=[A.α], linewidth=3)
+        contour!(X, Y, Z; levels=[A.α], linewidth=3, linecolor=:green)
     end
     return cn
 end
