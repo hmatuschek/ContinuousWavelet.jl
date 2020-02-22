@@ -4,11 +4,11 @@ using ContinuousWavelet
 # Convert jmd -> md
 foreach(
     filename -> weave(
-        joinpath(dirname(pathof(ContinuousWavelet)), "..", "doc", filename),
+        joinpath(dirname(pathof(ContinuousWavelet)), "..", "docs", filename),
         doctype = "github",
-        fig_path = joinpath("doc", "fig"),
+        fig_path = joinpath("docs", "fig"),
         fig_ext = ".svg",
-        out_path = joinpath("doc"),
+        out_path = joinpath("docs"),
     ),
     [
         "wavelets.jmd",
@@ -18,7 +18,7 @@ foreach(
 
 # assemble docs from md sources
 makedocs(
-    root = joinpath(dirname(pathof(ContinuousWavelet)), "..", "doc"),
+    root = joinpath(dirname(pathof(ContinuousWavelet)), "..", "docs"),
     sitename = "ContinuousWavelet",
     pages = [
         "index.md",
