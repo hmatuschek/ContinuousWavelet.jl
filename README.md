@@ -6,7 +6,7 @@ Implements the contiuous wavelet transform, synthesis and some derived time-seri
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://hmatuschek.github.io/ContinuousWavelet.jl/dev)
 
 ## License (MIT)
-Copyright (c) 2020 Hannes Matuschek <hannes.matuschek@uni-potsdam.de>
+Copyright (c) 2020 Hannes Matuschek <hannes [dot] matuschek [at] uni-potsdam [dot] de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
