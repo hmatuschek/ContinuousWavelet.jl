@@ -1,1 +1,21 @@
 # Continuous Wavelets
+The `ContinuousWavelet` library implements (for now) only two *mother wavelets*.
+
+```@docs
+CauchyWavelet
+MorletWavelet
+```
+
+All *mother wavelets* are derived from the abstract type
+```@docs
+ContinuousWavelet.GenericContinuousWavelet
+```
+
+## Methods
+```@docs
+ContinuousWavelet.eval_analysis
+ContinuousWavelet.eval_synthesis
+ContinuousWavelet.eval_repkern
+ContinuousWavelet.cutoff_time
+ContinuousWavelet.cutoff_freq
+```

@@ -1,3 +1,10 @@
+@doc raw"""
+The Morlet wavelet.
+```math
+ g(t) = \sqrt{\frac{\delta}{2\pi}}\exp(2\pi\,i\,t-t^2\,\delta)\,,
+```
+where δ specifies the time-frequency resolution of the wavelet.
+"""
 struct MorletWavelet <: GenericContinuousWavelet
     dff::Float64
     norm::Float64

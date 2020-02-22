@@ -2,12 +2,29 @@ using DSP: conv
 
 include("transformed.jl")
 
+@doc raw"""
+This struct represents a planned continuous wavelet transform. It contains the voices on which the
+transform is performed as well the pre-computed analysis wavelets.
+
+# Fields
+- `wavelet`: Holds a reference to the wavelet to use for the transformation.
+- `blocks`: The grouping of the voices of same kernel size for faster block-convolution.
+- `scales`: The scales on which the wavelet transform will be performed.
+- `kernels`: Matrix of evaluated kernels for the convolution.
+"""
 struct ContinuousWaveletTransform
     wavelet::GenericContinuousWavelet
     blocks::Array{Tuple{Int32,Int32,Int32}, 1}
     scales::Array{Float64, 1}
     kernels::Array{Complex{Float64}, 2}
 
+    @doc raw"""
+        ContinuousWaveletTransform(wav::GenericContinuousWavelet, scales::AbstractVector)
+
+    Constructs a new wavelet transform for the given wavelet (`wav`) and `scales`. This constructor
+    pre-computes the kernels for the given scales. It is therefore efficient to perform several
+    transformations using `transform()` with the same `ContinuousWaveletTransform` object.
+    """
     function ContinuousWaveletTransform(wav::GenericContinuousWavelet, scales::AbstractVector)
         blocks  = Tuple{Int32,Int32,Int32}[]
         lengths = Int32[]
@@ -36,6 +53,12 @@ struct ContinuousWaveletTransform
     end
 end
 
+@doc raw"""
+    transform(trans::ContinuousWaveletTransform, x::AbstractArray{Float64,1})
+
+Performes the planned continuous wavelet transfrom given by `trans` of the timeseries `x`. The
+result is a `ContinuousWavelet.ContinuousWaveletTransformed` object.
+"""
 function transform(trans::ContinuousWaveletTransform, x::AbstractArray{Float64,1})
     N = length(x)
     M = length(trans.scales)

@@ -9,8 +9,10 @@ associated analyses like coherence analyses.
 
 ```@contents
 Pages = [
-        "wavelet.md",
-        "transform.md"
+        "transform.md",
+        "wavelets.md",
+        "coherence.md",
+        "utils.md"
 ]
 Depth = 2
 ```

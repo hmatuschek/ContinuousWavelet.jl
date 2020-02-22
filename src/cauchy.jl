@@ -1,3 +1,19 @@
+@doc raw"""
+The Cauchy or Paul wavelet.
+
+In contrast to the `MorletWavelet`, the Cauchy or Paul wavelet is a proper wavelet with a
+similar good localization in time and scale.
+
+There are different definitions of the Cauchy wavelet around. Here one is implemented where
+the center frequency is always 1 irrespective of the value of α:
+```math
+ g(t) = h(t) = \left(1-i\,\frac{2\pi\,t}{\alpha}\right)^{-(1+\alpha)}\,,
+```
+and its reproducing kernel
+```math
+ P_{g,h}(b, a) = \Gamma(2\alpha+1)\,a^{\alpha+1}\,\left(1+a-\frac{i\,b}{a}\right)^{-(2\alpha+1)}\,.
+```
+"""
 struct CauchyWavelet <: GenericContinuousWavelet
     α::Float64;
     norm::Float64;

@@ -13,6 +13,8 @@ foreach(
     [
         "wavelets.jmd",
         "transform.jmd",
+        "coherence.jmd",
+        "utils.jmd"
     ]
 )
 
@@ -22,8 +24,10 @@ makedocs(
     sitename = "ContinuousWavelet",
     pages = [
         "index.md",
-        "wavelets.md",
         "transform.md",
+        "wavelets.md",
+        "coherence.md",
+        "utils.md"
     ],
 )
 

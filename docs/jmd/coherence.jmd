@@ -1,0 +1,12 @@
+# Coherence analyses
+
+```@docs
+coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
+coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}, Y::AbstractArray{Float64, 2}; nsurrogate=0, α=0.05)
+```
+
+## Coherence analysis result
+```@docs
+ContinuousWavelet.ContinuousWaveletCoherence
+Plots.contourf(A::ContinuousWavelet.ContinuousWaveletCoherence; kw...)
+```
