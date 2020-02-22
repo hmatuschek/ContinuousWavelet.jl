@@ -13,7 +13,7 @@ struct ContinuousWaveletTransform
         lengths = Int32[]
         sscales = sort(scales)
         sizes   = Array{Int32}(exp2.(ceil.(log2.(cutoff_time(wav).*sscales))))
-        kernels = zeros(Complex{Float64}, sizes[end-1], length(scales))
+        kernels = zeros(Complex{Float64}, sizes[end], length(scales))
 
         # Start the first block for the first kernel
         nblock = 1
