@@ -1,5 +1,6 @@
 .DS_Store
 /Manifest.toml
 /dev/
-/doc/*.html
-/doc/examples/*.html
+/docs/Manifest.toml
+/docs/*.html
+/docs/examples/*.html
