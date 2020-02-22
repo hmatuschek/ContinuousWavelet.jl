@@ -9,7 +9,7 @@ struct MorletWavelet <: GenericContinuousWavelet
     dff::Float64
     norm::Float64
 
-    function MorletWavelet(dff::Float64)
+    function MorletWavelet(dff::Real)
         new(dff, dff/2/π);
     end
 end

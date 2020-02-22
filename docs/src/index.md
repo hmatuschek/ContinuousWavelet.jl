@@ -12,7 +12,8 @@ Pages = [
         "transform.md",
         "wavelets.md",
         "coherence.md",
-        "utils.md"
+        "utils.md",
+        "examples.md"
 ]
 Depth = 2
 ```

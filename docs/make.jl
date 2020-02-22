@@ -14,7 +14,8 @@ foreach(
         "wavelets.jmd",
         "transform.jmd",
         "coherence.jmd",
-        "utils.jmd"
+        "utils.jmd",
+        "examples.jmd"
     ]
 )
 
@@ -27,7 +28,8 @@ makedocs(
         "transform.md",
         "wavelets.md",
         "coherence.md",
-        "utils.md"
+        "utils.md",
+        "examples.md"
     ],
 )
 

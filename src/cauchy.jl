@@ -18,7 +18,7 @@ struct CauchyWavelet <: GenericContinuousWavelet
     α::Float64;
     norm::Float64;
 
-    function CauchyWavelet(α::Float64)
+    function CauchyWavelet(α::Real)
         norm = exp(-2*log(2π) - logabsgamma(2α+1)[1]/2 + logabsgamma(α+1)[1]
           + (2α+1)*log(2)/2 + log(α));
         new(α, norm);
