@@ -62,7 +62,7 @@ result is a `ContinuousWavelet.ContinuousWaveletTransformed` object.
 function transform(trans::ContinuousWaveletTransform, x::AbstractArray{Float64,1})
     N = length(x)
     # check if largest kernel exceeds TS length
-    (N < maximum(trans.sizes)) && info("Largest kernel exceeds time-series length!")
+    (N < maximum(map(b -> b[3], trans.blocks))) && info("Largest kernel exceeds time-series length!")
     M = length(trans.scales)
     wX = Array{Complex{Float64},2}(undef, N,M)
     for (a,b,K) in trans.blocks

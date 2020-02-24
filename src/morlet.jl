@@ -31,10 +31,10 @@ end
 
 function cutoff_time(wav::MorletWavelet)
     # 99.9% power at scale 1
-    3/sqrt(wav.dff);
+    4.7/sqrt(wav.dff);
 end;
 
 function cutoff_freq(wav::MorletWavelet)
     # 99.9% power at scale 1
-    1 + 3*sqrt(wav.dff);
+    1 + 4.7*sqrt(wav.dff);
 end;
