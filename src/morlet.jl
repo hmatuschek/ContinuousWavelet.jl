@@ -30,11 +30,11 @@ function eval_repkern(wav::MorletWavelet, a::Float64, b::Float64)
 end
 
 function cutoff_time(wav::MorletWavelet)
-    # 99.9999% power at scale 1
-    5/sqrt(wav.dff);
+    # 99.9% power at scale 1
+    3/sqrt(wav.dff);
 end;
 
 function cutoff_freq(wav::MorletWavelet)
-    # 99.9999% power at scale 1
-    1 + 5*sqrt(wav.dff);
+    # 99.9% power at scale 1
+    1 + 3*sqrt(wav.dff);
 end;

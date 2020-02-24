@@ -37,11 +37,11 @@ function eval_repkern(wav::CauchyWavelet, a::Float64, b::Float64)
 end
 
 function cutoff_time(wav::CauchyWavelet)
-    eps = 1e-6;
+    eps = 1e-3;
     wav.α*sqrt(eps^(-2/(wav.α+1))-1)/(2π);
 end;
 
 function cutoff_freq(wav::CauchyWavelet)
-    eps = 1e-6;
+    eps = 1e-3;
     1 + 1/( wav.α^2 * (eps^(-2 / (wav.α + 1)) - 1) / ((2π)^2) );
 end;
