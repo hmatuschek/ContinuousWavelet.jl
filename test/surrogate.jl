@@ -1,5 +1,3 @@
-using ContinuousWavelet
-using Test
 using Random
 
 

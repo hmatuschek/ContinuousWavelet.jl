@@ -15,7 +15,7 @@ struct MorletWavelet <: GenericContinuousWavelet
 end
 
 function eval_analysis(wav::MorletWavelet, t::Float64)
-    exp(-t^2 * wav.dff/2 + 2π*t*1im) * norm;
+    exp(-t^2 * wav.dff/2 + 2π*t*1im) * wav.norm;
 end
 
 eval_synthesis(wav::MorletWavelet, t::Float64) = eval_analyis(wav, t);
@@ -30,11 +30,11 @@ function eval_repkern(wav::MorletWavelet, a::Float64, b::Float64)
 end
 
 function cutoff_time(wav::MorletWavelet)
-    # 99% power at scale 1
-    3/sqrt(wav.dff);
+    # 99.9999% power at scale 1
+    5/sqrt(wav.dff);
 end;
 
 function cutoff_freq(wav::MorletWavelet)
-    # 99.% power at scale 1
-    1 + 3*sqrt(wav.dff);
+    # 99.9999% power at scale 1
+    1 + 5*sqrt(wav.dff);
 end;
