@@ -17,11 +17,19 @@ and its reproducing kernel
 struct CauchyWavelet <: GenericContinuousWavelet
     α::Float64;
     norm::Float64;
+    ϵ::Float64
 
-    function CauchyWavelet(α::Real)
+    @doc raw"""
+    Constructs a new Cauchy wavelet, whith the given α specifying the time-frequency resolution.
+    The optional keyword arguent ϵ specifies the cutoff at which the kernel evaluation gets
+    truncated. It is defined as the fraction of total power loss of the mother wavelet. Smaller
+    values of ϵ will increase the precision of the wavelet transform on the cost of longer kernels
+    leading to slower convolutions.
+    """
+    function CauchyWavelet(α::Real; ϵ::Real=1e-2)
         norm = exp(-2*log(2π) - logabsgamma(2α+1)[1]/2 + logabsgamma(α+1)[1]
           + (2α+1)*log(2)/2 + log(α));
-        new(α, norm);
+        new(α, norm, ϵ);
     end
 end
 
@@ -37,11 +45,9 @@ function eval_repkern(wav::CauchyWavelet, a::Float64, b::Float64)
 end
 
 function cutoff_time(wav::CauchyWavelet)
-    eps = 1e-3;
-    wav.α*sqrt(eps^(-2/(wav.α+1))-1)/(2π);
+    wav.α*sqrt(wav.ϵ^(-2/(wav.α+1))-1)/(2π);
 end;
 
 function cutoff_freq(wav::CauchyWavelet)
-    eps = 1e-3;
-    1 + 1/( wav.α^2 * (eps^(-2 / (wav.α + 1)) - 1) / ((2π)^2) );
+    1 + 1/( wav.α^2 * (wav.ϵ^(-2 / (wav.α + 1)) - 1) / ((2π)^2) );
 end;
