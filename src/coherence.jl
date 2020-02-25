@@ -136,13 +136,22 @@ Base.getindex(A::ContinuousWaveletCoherence, I::Vararg{Int, N}) where {N} = geti
 Base.setindex!(A::ContinuousWaveletCoherence, v, I::Vararg{Int, N}) where {N} = setindex!(A.coh, v, I...)
 
 @doc raw"""
-    contourf(A::ContinuousWaveletCoherence; kw...)
+    contourf(A::ContinuousWaveletCoherence;  drawvalid=true, shadevalid=true, kw...)
 
 Implements a plotting helper function to plot wavelet-coherence analyses using a filled contour
-plot. If a significance test was performed using surrogate data during the analyses, the
+plot.
+
+If a significance test was performed using surrogate data during the analyses, the
 point-wise significant areas are shown using a single (thicker) contour line.
+
+If the optional keyword argument `drawvalid` is `true` (default), the area of valid wavelet
+coefficients is marked by a thick black line. If the optional keyword arguement `shadevalid` is
+also `true` (default) the invalid wavelet coefficients are shaded gray. A valid wavelet coefficient
+is one, where the accociated wavelet does not overlapp with the edges of the time-series.
+
+Additional keyword arguments are passed to the default implementation of `Plots.contourf()`.
 """
-function Plots.contourf(A::ContinuousWaveletCoherence; kw...)
+function Plots.contourf(A::ContinuousWaveletCoherence;  drawvalid=true, shadevalid=true, kw...)
     N,M = size(A)
     X = 1:N; Y = A.scales
     Z = transpose(map(abs, A.coh))
@@ -155,18 +164,25 @@ function Plots.contourf(A::ContinuousWaveletCoherence; kw...)
         contour!(X, Y, Z; levels=[A.α], linewidth=3, linecolor=:green)
     end
     # draw valid range
-    x = [1.0]; y = Float64[A.scales[1]]
-    for i in 1:M
-        tc = cutoff_time(A.wavelet)*A.scales[i]
-        if (tc < N÷2)
-            push!(y, A.scales[i])
-            push!(x, tc)
+    if drawvalid
+        x = [1.0]; y = Float64[A.scales[1]]
+        for i in 1:M
+            tc = cutoff_time(A.wavelet)*A.scales[i]
+            if (tc < N÷2)
+                push!(y, A.scales[i])
+                push!(x, tc)
+            end
+        end
+        append!(x, reverse(N.-x))
+        append!(y, reverse(y))
+        if shadevalid
+            plot!(x,y;
+                linecolor=:black, linewidth=3, label="",
+                fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
+        else
+            plot!(x,y;
+                linecolor=:black, linewidth=3, label="")
         end
     end
-    append!(x, reverse(N.-x))
-    append!(y, reverse(y))
-    plot!(x,y;
-          linecolor=:black, linewidth=3, label="",
-          fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
     return cn
 end

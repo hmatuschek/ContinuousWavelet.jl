@@ -25,29 +25,41 @@ Base.getindex(A::ContinuousWaveletTransformed, I::Vararg{Int, N}) where {N} = ge
 Base.setindex!(A::ContinuousWaveletTransformed, v, I::Vararg{Int, N}) where {N} = setindex!(A.wX, v, I...)
 
 @doc raw"""
-    Plots.contourf(A::ContinuousWavelet.ContinuousWaveletTransformed; kw...)
+    Plots.contourf(A::ContinuousWavelet.ContinuousWaveletTransformed; drawvalid=true, shadevalid=true, kw...)
 
 Plots the modulus (absolute value) of the wavelet transformed using a filled-contour plot.
+
+If the optional keyword argument `drawvalid` is `true` (default), the area of valid wavelet
+coefficients is marked by a thick black line. If the optional keyword arguement `shadevalid` is
+also `true` (default) the invalid wavelet coefficients are shaded gray. A valid wavelet coefficient
+is one, where the accociated wavelet does not overlapp with the edges of the time-series.
+
 Additional keyword arguments are passed to the default implementation of `Plots.contourf()`.
 """
-function Plots.contourf(A::ContinuousWaveletTransformed; kw...)
+function Plots.contourf(A::ContinuousWaveletTransformed; drawvalid=true, shadevalid=true, kw...)
     # Draw transformed as heatmap
     N,M = size(A)
     cn = contourf(1:N, A.scales, transpose(map(abs, A.wX));
          linewidth=0, linetype=:heatmap, xlims=(1,N), ylims=(minimum(A.scales),maximum(A.scales)),
          kw...);
     # draw valid range
-    x = [1.0]; y = Float64[A.scales[1]]
-    for i in 1:M
-        tc = cutoff_time(A.wavelet)*A.scales[i]
-        if (tc < N÷2)
-            push!(y, A.scales[i])
-            push!(x, tc)
+    if drawvalid
+        x = [1.0]; y = Float64[A.scales[1]]
+        for i in 1:M
+            tc = cutoff_time(A.wavelet)*A.scales[i]
+            if (tc < N÷2)
+                push!(y, A.scales[i])
+                push!(x, tc)
+            end
+        end
+        append!(x, reverse(N.-x))
+        append!(y, reverse(y))
+        if shadevalid
+            plot!(x,y; linecolor=:black, linewidth=3, label="",
+                  fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
+        else
+            plot!(x,y; linecolor=:black, linewidth=3, label="")
         end
     end
-    append!(x, reverse(N.-x))
-    append!(y, reverse(y))
-    plot!(x,y; linecolor=:black, linewidth=3, label="",
-          fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
     return cn
 end
