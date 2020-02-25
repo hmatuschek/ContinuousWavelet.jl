@@ -18,6 +18,6 @@ end
 
 wt = ContinuousWaveletTransform(CauchyWavelet(10.0), LinRange(2,100, 64));
 
-Cx = coherence(wt, transpose(X))
+Cx = coherence(wt, transpose(X); nsurrogate=5)
 contourf(Cx);
 ```

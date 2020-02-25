@@ -31,6 +31,23 @@ Plots the modulus (absolute value) of the wavelet transformed using a filled-con
 Additional keyword arguments are passed to the default implementation of `Plots.contourf()`.
 """
 function Plots.contourf(A::ContinuousWaveletTransformed; kw...)
-    contourf(1:size(A.wX)[1], A.scales, transpose(map(abs, A.wX)); linewidth=0, linetype=:heatmap, kw...);
+    # Draw transformed as heatmap
+    N,M = size(A)
+    cn = contourf(1:N, A.scales, transpose(map(abs, A.wX));
+         linewidth=0, linetype=:heatmap, xlims=(1,N), ylims=(minimum(A.scales),maximum(A.scales)),
+         kw...);
     # draw valid range
+    x = [1.0]; y = Float64[A.scales[1]]
+    for i in 1:M
+        tc = cutoff_time(A.wavelet)*A.scales[i]
+        if (tc < N÷2)
+            push!(y, A.scales[i])
+            push!(x, tc)
+        end
+    end
+    append!(x, reverse(N.-x))
+    append!(y, reverse(y))
+    plot!(x,y; linecolor=:black, linewidth=3, label="",
+          fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
+    return cn
 end

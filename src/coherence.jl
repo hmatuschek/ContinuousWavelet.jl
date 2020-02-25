@@ -143,14 +143,30 @@ plot. If a significance test was performed using surrogate data during the analy
 point-wise significant areas are shown using a single (thicker) contour line.
 """
 function Plots.contourf(A::ContinuousWaveletCoherence; kw...)
-    X = 1:size(A.coh)[1]
-    Y = A.scales
+    N,M = size(A)
+    X = 1:N; Y = A.scales
     Z = transpose(map(abs, A.coh))
-    cn = contourf(X, Y, Z; linewidth=0, linetype=:heatmap, kw...);
-    # TODO draw valid range
+    cn = contourf(X, Y, Z;
+                  linewidth=0, linetype=:heatmap,
+                  xlims=(1,N), ylims=(minimum(A.scales),maximum(A.scales)),
+                  kw...);
     # draw point-wise significance level if set
     if isfinite(A.α)
         contour!(X, Y, Z; levels=[A.α], linewidth=3, linecolor=:green)
     end
+    # draw valid range
+    x = [1.0]; y = Float64[A.scales[1]]
+    for i in 1:M
+        tc = cutoff_time(A.wavelet)*A.scales[i]
+        if (tc < N÷2)
+            push!(y, A.scales[i])
+            push!(x, tc)
+        end
+    end
+    append!(x, reverse(N.-x))
+    append!(y, reverse(y))
+    plot!(x,y;
+          linecolor=:black, linewidth=3, label="",
+          fillrange=A.scales[end], fillalpha=0.5, fillcolor=:black)
     return cn
 end
