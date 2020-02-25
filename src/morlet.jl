@@ -13,13 +13,15 @@ struct MorletWavelet <: GenericContinuousWavelet
     σ::Float64
 
     @doc raw"""
+        MorletWavelet(δ::Real; ϵ::Real=1e-3)
+
     Constructs a new Morlet wavelet, whith the given `dff` parameter specifying the time-frequency
     resolution. The optional keyword arguent ϵ specifies the cutoff at which the kernel evaluation
     gets truncated. It is defined as the fraction of total power loss of the mother wavelet. Smaller
     values of ϵ will increase the precision of the wavelet transform on the cost of longer kernels
     leading to slower convolutions.
     """
-    function MorletWavelet(δ::Real; ϵ=1e-3)
+    function MorletWavelet(δ::Real; ϵ::Real=1e-3)
         new(δ, δ/2/π, sqrt(2)*erfcinv(2*ϵ));
     end
 end

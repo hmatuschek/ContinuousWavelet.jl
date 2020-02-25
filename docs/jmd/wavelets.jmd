@@ -1,9 +1,15 @@
 # Continuous Wavelets
 The `ContinuousWavelet` library implements (for now) only two *mother wavelets*.
 
+## The Cauchy or Paul Wavelet
 ```@docs
 CauchyWavelet
+CauchyWavelet(α::Real; ϵ::Real=1e-2)
+```
+## The Morlet Wavlet
+```@docs
 MorletWavelet
+MorletWavelet(δ::Real; ϵ::Real=1e-3)
 ```
 
 All *mother wavelets* are derived from the abstract type
