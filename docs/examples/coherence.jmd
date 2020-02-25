@@ -11,13 +11,27 @@ gr();
 
 N = 1024;
 M = 10;
-X = zeros(Float64, M, N);
+X = zeros(Float64, N,M);
 for i in 1:M
-  X[i,:] = sin.(2π*(1:N)/50)+3*randn(Float64, N)
+  X[:,i] = 10 .+ sin.(2π*(1:N)/50)+3*randn(Float64, N)
 end
+Y = copy(X)
+detrend!(Y)
 
+plot(X[:,1])
+plot!(Y[:,1])
+```
+
+```julia
 wt = ContinuousWaveletTransform(CauchyWavelet(10.0), LinRange(2,100, 64));
 
-Cx = coherence(wt, transpose(X); nsurrogate=5)
-contourf(Cx);
+Cx = coherence(wt, X; nsurrogate=5)
+Cy = coherence(wt, Y; nsurrogate=5)
+
+plot(
+  contourf(Cx),
+  contourf(Cy),
+  layout = (2,1)
+)
+
 ```
