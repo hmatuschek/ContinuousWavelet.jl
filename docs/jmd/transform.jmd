@@ -1,3 +1,6 @@
+```julia; echo=false
+using Plots
+```
 # Wavelet transform
 
 The continuous wavelet transform is just the convolution of some time-series ``$x(t)$`` with some
@@ -30,5 +33,5 @@ directly. Additionally, specialized methods are provided for plotting the wavele
 
 ```@docs
 ContinuousWavelet.ContinuousWaveletTransformed
-Plots.contourf(A::ContinuousWavelet.ContinuousWaveletTransformed; kw...)
+Plots.contourf(A::ContinuousWaveletTransformed; drawvalid=true, shadevalid=true, kw...)
 ```

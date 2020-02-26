@@ -1,3 +1,6 @@
+```julia; echo=false
+using Plots
+```
 # Coherence analyses
 
 ```@docs
@@ -8,5 +11,5 @@ coherence(wt::ContinuousWaveletTransform, X::AbstractArray{Float64, 2}, Y::Abstr
 ## Coherence analysis result
 ```@docs
 ContinuousWavelet.ContinuousWaveletCoherence
-Plots.contourf(A::ContinuousWavelet.ContinuousWaveletCoherence; kw...)
+Plots.contourf(A::ContinuousWaveletCoherence;  drawvalid=true, shadevalid=true, kw...)
 ```

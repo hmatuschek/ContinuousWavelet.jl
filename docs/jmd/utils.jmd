@@ -5,10 +5,10 @@ Offsets and trends in time-series may lead to significant edge-effects in the wa
 To detrend time series before performing the wavelet transform, the `detrend` method might be used.
 
 ```@docs
-detrend(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y)))
-detrend(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y)))
-detrend!(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y)))
-detrend!(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y)))
+detrend(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y))) where {U,V}
+detrend(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y))) where {U,V}
+detrend!(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y))) where {U,V}
+detrend!(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y))) where {U,V}
 ```
 
 
