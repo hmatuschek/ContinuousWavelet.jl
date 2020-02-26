@@ -1,7 +1,11 @@
 using FFTW: r2r, r2r!, R2HC, HC2R
 using Random
 
+@doc raw"""
+    surrogate(A::AbstractArray{Float64, 1})
 
+Generates a new surrogate time-series for the given one by means of phase-randomization.
+"""
 function surrogate(A::AbstractArray{Float64, 1})
     N = length(A)
     # compute real -> half-complex DFT
@@ -19,6 +23,11 @@ function surrogate(A::AbstractArray{Float64, 1})
     return res ./ N;
 end
 
+@doc raw"""
+    surrogate(A::AbstractArray{Float64, 1})
+
+Generates a new surrogate time-series in-place for the given one by means of phase-randomization.
+"""
 function surrogate!(A::AbstractArray{Float64, 1})
     N = length(A)
     # compute real -> half-complex DFT
@@ -37,6 +46,11 @@ function surrogate!(A::AbstractArray{Float64, 1})
 end
 
 
+@doc raw"""
+    surrogate(A::AbstractArray{Float64, 1})
+
+Generates a new surrogate time-series for each column of `A` by means of phase-randomization.
+"""
 function surrogate(A::AbstractArray{Float64, 2})
     N,M = size(A)
     # compute real -> half-complex DFT
@@ -54,6 +68,11 @@ function surrogate(A::AbstractArray{Float64, 2})
     return res ./ N;
 end
 
+@doc raw"""
+    surrogate(A::AbstractArray{Float64, 1})
+
+Generates a new surrogate time-series in-place for each column of `A` by means of phase-randomization.
+"""
 function surrogate!(A::AbstractArray{Float64, 2})
     N,M = size(A)
     # compute real -> half-complex DFT inplace
