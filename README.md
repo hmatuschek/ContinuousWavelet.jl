@@ -6,9 +6,9 @@ Implements the contiuous wavelet transform, synthesis and some derived time-seri
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://hmatuschek.github.io/ContinuousWavelet.jl/dev)
 
 ## Build Status
-![Documentation](https://github.com/hmatuschek/ContinuousWavelet.jl/workflows/Documentation/badge.svg?branch=master)
-![CI](https://github.com/hmatuschek/ContinuousWavelet.jl/workflows/CI/badge.svg?branch=master)
-![CC](https://codecov.io/github/hmatuschek/ContinuousWavelet.jl/badge.svg?branch=master)
+[![Documentation](https://github.com/hmatuschek/ContinuousWavelet.jl/workflows/Documentation/badge.svg?branch=master)](https://github.com/hmatuschek/ContinuousWavelet.jl/actions?query=workflow%3ADocumentation)
+[![CI](https://github.com/hmatuschek/ContinuousWavelet.jl/workflows/CI/badge.svg?branch=master)](https://github.com/hmatuschek/ContinuousWavelet.jl/actions?query=workflow%3ACI)
+[![CC](https://codecov.io/github/hmatuschek/ContinuousWavelet.jl/badge.svg?branch=master)](https://codecov.io/gh/hmatuschek/ContinuousWavelet.jl)
 
 ## License (MIT)
 Copyright (c) 2020 Hannes Matuschek <hannes [dot] matuschek [at] uni-potsdam [dot] de>
