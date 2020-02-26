@@ -1,5 +1,17 @@
 # Utilities
 
+## Detrending time-series
+Offsets and trends in time-series may lead to significant edge-effects in the wavelet transformed.
+To detrend time series before performing the wavelet transform, the `detrend` method might be used.
+
+```@docs
+detrend(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y)))
+detrend(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y)))
+detrend!(y::AbstractVector{V}, x::AbstractVector{U}=(1:length(y)))
+detrend!(y::AbstractArray{V,2}, x::AbstractVector{U}=(1:length(y)))
+```
+
+
 ## Generating surrogate time-series
 Frequently, it is necessary to generate surrogate time-series for some given observations.
 Particularly for coherence analyses, surrogate time-series provide means to assess the reliability
