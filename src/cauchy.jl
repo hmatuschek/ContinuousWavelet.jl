@@ -21,7 +21,7 @@ struct CauchyWavelet <: GenericContinuousWavelet
 
     @doc raw"""
         CauchyWavelet(α::Real; ϵ::Real=1e-2)
-        
+
     Constructs a new Cauchy wavelet, whith the given α specifying the time-frequency resolution.
     The optional keyword arguent ϵ specifies the cutoff at which the kernel evaluation gets
     truncated. It is defined as the fraction of total power loss of the mother wavelet. Smaller
@@ -39,7 +39,7 @@ function eval_analysis(wav::CauchyWavelet, t::Float64)
     (1 - 2im*π*t/wav.α)^(-1-wav.α);
 end
 
-eval_synthesis(wav::CauchyWavelet, t::Float64) = eval_analyis(wav, t);
+eval_synthesis(wav::CauchyWavelet, t::Float64) = eval_analysis(wav, t);
 
 function eval_repkern(wav::CauchyWavelet, a::Float64, b::Float64)
     c = wav.α*log(a) + logabsgamma(2*wav.α-1)[1] - (1+2*wav.α)*log(2π);

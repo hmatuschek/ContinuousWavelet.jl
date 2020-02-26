@@ -30,7 +30,7 @@ function eval_analysis(wav::MorletWavelet, t::Float64)
     exp(-t^2 * wav.δ/2 + 2π*t*1im) * wav.norm;
 end
 
-eval_synthesis(wav::MorletWavelet, t::Float64) = eval_analyis(wav, t);
+eval_synthesis(wav::MorletWavelet, t::Float64) = eval_analysis(wav, t);
 
 function eval_repkern(wav::MorletWavelet, a::Float64, b::Float64)
     a2p1 = (a^2 + 1); am1 = (a - 1);
