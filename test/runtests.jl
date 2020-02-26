@@ -6,4 +6,5 @@ using ContinuousWavelet
     include("surrogate.jl")
     include("cutofftime.jl")
     include("wtdelta.jl")
+    include("coherence.jl")
 end
