@@ -7,4 +7,5 @@ using ContinuousWavelet
     include("cutofftime.jl")
     include("wtdelta.jl")
     include("coherence.jl")
+    include("synthesis.jl")
 end

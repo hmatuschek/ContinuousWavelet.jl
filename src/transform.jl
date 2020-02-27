@@ -66,7 +66,7 @@ function transform(trans::ContinuousWaveletTransform, x::AbstractArray{Float64,1
     wX = Array{Complex{Float64},2}(undef, N,M)
     for (a,b,K) in trans.blocks
         off = K÷2
-        wX[:,(a:b)] = conv(trans.kernels[(1:K),(a:b)], x)[(off+1):(off+N)]
+        wX[:,(a:b)] = conv(trans.kernels[(1:K),(a:b)], x)[(off):(off+N-1)]
     end
 
     ContinuousWaveletTransformed(wX, trans.scales, trans.wavelet)
