@@ -1,0 +1,16 @@
+# Wavelet synthesis
+The wavelet synthesis provides the inverse operation to the wavelet transfrom. That is, it
+reconstructs the original time-series from the wavelet coefficients `m(b,a)` as
+```math
+x(t) = \int \frac{da}{a} \int db\,m(b,a)\,\frac{1}{a}h\left(\frac{b-t}{a}\right)
+```
+where `h(⋅)` is the synthesis wavelet associated with the analysis wavelet `g(⋅)` used to obtain
+the wavelet coefficients `m(b,a)`.
+
+The `synthesis()` method implements this inverse transform or synthesis. Please note that the
+wavelet synthesis above will generate the so-called Hilbert transformed of the original signal.
+Therefore, the `synthesis()` method accepts an optional keyword argument `hilbert` to choose
+whether the complex Hilbert transform or the real signal gets returned (the latter is the default).
+```@docs
+synthesis(wt::ContinuousWavelet.ContinuousWaveletTransformed; hilbert=false)
+```

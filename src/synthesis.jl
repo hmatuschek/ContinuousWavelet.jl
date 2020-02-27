@@ -4,7 +4,9 @@ using DSP: conv
     synthesis(wt::WaveletTransformed)
 
 Implements the continuous wavelet synthesis on some `WaveletTransformed` object. That is, it
-reconstructs the signal, `wt` was created from.
+reconstructs the signal, `wt` was created from. The optional keyword argument `hilbert` specifies
+whether the complex Hilbert transformed of the original signal or the real signal is returned. By
+default the real reconstruction is returned.
 """
 function synthesis(wt::ContinuousWavelet.ContinuousWaveletTransformed; hilbert=false)
     N, M = size(wt)

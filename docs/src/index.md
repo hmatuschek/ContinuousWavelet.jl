@@ -10,6 +10,7 @@ associated analyses like coherence analyses.
 ```@contents
 Pages = [
         "transform.md",
+        "synthesis.md",
         "wavelets.md",
         "coherence.md",
         "utils.md",

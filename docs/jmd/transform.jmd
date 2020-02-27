@@ -7,7 +7,7 @@ The continuous wavelet transform is just the convolution of some time-series ``$
 dilated (by ``$b$``) and scaled (by ``$a$``) kernel ``$g(\frac{t-b}{a})$``. The latter is the
 so-called *mother wavelet*. That is, the continuous wavelet transform is defined as
 ```math
-\mathcal{W}[x](b,a) = c_{g}\,\int_{-\infty}^{\infty} x(t)\,g^*\left(\frac{t-b}{a}\right)\,dt\,,
+\mathcal{W}[x](b,a) = \frac{c_{g}}{a}\,\int_{-\infty}^{\infty} x(t)\,g^*\left(\frac{t-b}{a}\right)\,dt\,,
 ```
 where ``$z^*$`` denotes the complex conjugate of ``$z$``.
 

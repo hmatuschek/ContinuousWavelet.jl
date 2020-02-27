@@ -13,6 +13,7 @@ foreach(
     [
         "wavelets.jmd",
         "transform.jmd",
+        "synthesis.jmd",
         "coherence.jmd",
         "utils.jmd",
         "examples.jmd"
@@ -26,6 +27,7 @@ makedocs(
     pages = [
         "index.md",
         "transform.md",
+        "synthesis.md",
         "wavelets.md",
         "coherence.md",
         "utils.md",
