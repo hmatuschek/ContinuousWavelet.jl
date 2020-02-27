@@ -6,5 +6,5 @@
     wX = transform(wt, X)
     Y  = synthesis(wX)
     edge = Int32(ceil(scale*ContinuousWavelet.cutoff_time(wav)))
-    @test maximum(abs.(X[edge:end-edge]-Y[edge:end-edge])) < 1e-2
+    @test maximum(abs.(X[edge:end-edge]-Y[edge:end-edge])) < 1e-1
 end
