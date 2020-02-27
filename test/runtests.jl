@@ -8,4 +8,5 @@ using ContinuousWavelet
     include("wtdelta.jl")
     include("coherence.jl")
     include("synthesis.jl")
+    include("plots.jl")
 end
