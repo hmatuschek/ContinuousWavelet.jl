@@ -30,7 +30,7 @@ struct CauchyWavelet <: GenericContinuousWavelet
     """
     function CauchyWavelet(α::Real; ϵ::Real=1e-2)
         norm = exp(-2*log(2π) - logabsgamma(2α+1)[1]/2 + logabsgamma(α+1)[1]
-          + (2α+1)*log(2)/2 + log(α)) * sqrt(2);
+          + (2α+2)*log(2)/2 + log(α));
         new(α, norm, ϵ);
     end
 end
