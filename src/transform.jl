@@ -39,7 +39,7 @@ struct ContinuousWaveletTransform
         for i in 2:length(scales)
             kernels[1:sizes[i],i] = map(t -> eval_analysis(wav, (t-sizes[i]/2)/sscales[i])/sscales[i], 1:sizes[i])
             # if same size than last block:
-            if blocks[end][2]==sizes[i]
+            if blocks[end][3]==sizes[i]
                 # -> add to block
                 blocks[end] = (blocks[end][1], i, sizes[i]);
             else
