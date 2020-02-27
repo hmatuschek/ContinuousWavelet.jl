@@ -30,7 +30,7 @@ struct CauchyWavelet <: GenericContinuousWavelet
     """
     function CauchyWavelet(α::Real; ϵ::Real=1e-2)
         norm = exp(-2*log(2π) - logabsgamma(2α+1)[1]/2 + logabsgamma(α+1)[1]
-          + (2α+1)*log(2)/2 + log(α));
+          + (2α+1)*log(2)/2 + log(α)) * sqrt(2);
         new(α, norm, ϵ);
     end
 end
@@ -39,7 +39,7 @@ function eval_analysis(wav::CauchyWavelet, t::Float64)
     (1 - 2im*π*t/wav.α)^(-1-wav.α);
 end
 
-eval_synthesis(wav::CauchyWavelet, t::Float64) = eval_analysis(wav, t);
+eval_synthesis(wav::CauchyWavelet, t::Float64) = wav.norm * eval_analysis(wav, t);
 
 function eval_repkern(wav::CauchyWavelet, a::Float64, b::Float64)
     c = wav.α*log(a) + logabsgamma(2*wav.α-1)[1] - (1+2*wav.α)*log(2π);
