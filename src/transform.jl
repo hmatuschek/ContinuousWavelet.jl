@@ -33,12 +33,11 @@ struct ContinuousWaveletTransform
         kernels = zeros(Complex{Float64}, sizes[end], length(scales))
 
         # Start the first block for the first kernel
-        nblock = 1
         push!(blocks, (1, 1, sizes[1]) )
-        kernels[1:sizes[1],1] = map(t -> eval_analysis(wav, (t-sizes[1]/2)/sscales[1]), 1:sizes[1])
+        kernels[1:sizes[1],1] = map(t -> eval_analysis(wav, (t-sizes[1]/2)/sscales[1])/sscales[1], 1:sizes[1])
         # process the remaining kernels
         for i in 2:length(scales)
-            kernels[1:sizes[i],i] = map(t -> eval_analysis(wav, (t-sizes[i]/2)/sscales[i]), 1:sizes[i])
+            kernels[1:sizes[i],i] = map(t -> eval_analysis(wav, (t-sizes[i]/2)/sscales[i])/sscales[i], 1:sizes[i])
             # if same size than last block:
             if blocks[end][2]==sizes[i]
                 # -> add to block
